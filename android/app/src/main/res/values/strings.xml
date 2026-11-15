@@ -7,6 +7,7 @@
     <!-- وضعیت‌ها -->
     <string name="offline_mode">📴 حالت آفلاین — نسخهٔ ذخیره‌شده در برنامه</string>
     <string name="no_app_for_link">برنامه‌ای برای باز کردن این لینک پیدا نشد</string>
+    <string name="no_file_manager">برنامهٔ انتخاب عکس روی گوشی پیدا نشد</string>
     <string name="share_app">اشتراک‌گذاری برنامه</string>
 
     <!-- اعلان‌ها -->

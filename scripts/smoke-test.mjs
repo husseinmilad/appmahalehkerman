@@ -44,11 +44,11 @@ setTimeout(() => {
   const w = dom.window;
   const d = w.document;
   const app = d.querySelector('#v');
-  const click = el => el.dispatchEvent(new w.MouseEvent('click', { bubbles: true }));
 
   if (!d.querySelector('h1')) fail('صفحهٔ اول رندر نشد');
   else pass('صفحهٔ اول: ' + d.querySelector('h1').textContent.trim());
 
+  const click = el => el.dispatchEvent(new w.MouseEvent('click', { bubbles: true }));
   const navCount = d.querySelectorAll('#nav button').length;
   navCount === 5 ? pass('نوار پایین: ۵ بخش') : fail('نوار پایین ناقص: ' + navCount);
 
@@ -89,6 +89,42 @@ setTimeout(() => {
   w.go('home');
   /مراسم آزمایشی/.test(app.innerHTML) ? pass('ثبت مراسم و نمایش در صفحهٔ اول') : fail('مراسم ثبت نشد');
   /شمارش معکوس/.test(app.innerHTML) ? pass('کارت شمارش معکوس') : fail('شمارش معکوس نمایش داده نشد');
+
+  // پرچم بالای صفحه (تصویر جاسازی‌شده)
+  const flagImg = w.getComputedStyle(d.documentElement).getPropertyValue('--flagimg').trim();
+  flagImg.startsWith("url('data:image/jpeg;base64,")
+    ? pass('تصویر پرچم جاسازی شده (' + Math.round(flagImg.length / 1024) + ' KB)')
+    : fail('تصویر پرچم جاسازی نشده');
+  /padding-top:var\(--flagh\)/.test(html)
+    ? pass('محتوا زیر نوار پرچم فاصله دارد')
+    : fail('نوار پرچم ممکن است روی محتوا بیفتد');
+
+  // انتخاب عکس (بنر) با label کلیک‌پذیر
+  w.go('admin');
+  if (!/پنل مدیریت/.test(d.querySelector('#v').innerHTML)) {
+    d.querySelector('#pin').value = '1234';
+    w.login();
+  }
+  const setChip = [...d.querySelectorAll('.chips .chip')]
+    .find(c => c.textContent.trim() === 'تنظیمات' && (c.getAttribute('onclick') || '').includes('adm.s'));
+  if (setChip) {
+    click(setChip);
+    const bannerInput = [...d.querySelectorAll('#v input[type=file]')]
+      .find(i => (i.getAttribute('onchange') || '').includes('S.banner'));
+    bannerInput && bannerInput.closest('label')
+      ? pass('دکمهٔ انتخاب عکس بنر آماده است')
+      : fail('دکمهٔ انتخاب عکس بنر نیست');
+    const delBtn = [...d.querySelectorAll('#v button')].find(b => b.textContent.includes('حذف عکس'));
+    delBtn ? pass('دکمهٔ حذف عکس بنر') : fail('دکمهٔ حذف عکس نیست');
+  } else {
+    fail('بخش تنظیمات پنل پیدا نشد');
+  }
+
+  // متن محرمانگی فرم همکاری
+  w.go('collab');
+  /اطلاعات شما محرمانه نزد خادمان قرارگاه باقی می\u200cماند/.test(d.querySelector('#v').textContent)
+    ? pass('یادآوری محرمانگی در فرم همکاری')
+    : fail('متن محرمانگی در فرم همکاری نیست');
 
   if (errors.length) fail('خطاهای جاوااسکریپت:\n' + errors.slice(0, 5).join('\n'));
   else pass('بدون خطای جاوااسکریپت');

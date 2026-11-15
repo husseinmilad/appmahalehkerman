@@ -1,6 +1,6 @@
 /* قرارگاه مردمی مدافعان وطن — محله کرمان
    Service Worker: پیش‌بارگذاری پوستهٔ برنامه + شبکه‌اول با بازگشت به کش */
-const VERSION = 'v1.0.0';
+const VERSION = 'v1.0.1';
 const SHELL = 'qm-shell-' + VERSION;
 const RUNTIME = 'qm-runtime-' + VERSION;
 const SHELL_FILES = [
