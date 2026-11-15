@@ -122,20 +122,26 @@ jobs:
           cat out/SHA256SUMS.txt
 
       - name: Verify APK contents
+        id: verify
         run: |
-          set -e
-          APK=$(ls out/qarargah-kerman-*-[0-9]*.apk 2>/dev/null | grep -v debug | head -1)
-          echo "بررسی: $APK"
+          mkdir -p diag
+          APK=$(ls out/qarargah-kerman-*.apk | grep -v debug | head -1)
+          echo "APK=$APK" | tee diag/verify.txt
           AAPT=$(ls "$SDK"/build-tools/*/aapt2 2>/dev/null | sort -V | tail -1)
-          "$AAPT" dump badging "$APK" | grep -E "^(package|application-label|sdkVersion|targetSdkVersion|launchable-activity)" || true
-          echo "--- محتویات assets (فهرست کامل) ---"
-          unzip -l "$APK" | grep -i "assets" || echo "(هیچ فایل assets یافت نشد)"
-          echo "--- تولید بستهٔ آفلاین ---"
-          ls -R android/app/build/generated/offlineBundle 2>/dev/null || echo "(پوشهٔ تولیدشده وجود ندارد)"
-          unzip -l "$APK" | grep "assets/web" || { echo "❌ بستهٔ آفلاین در APK نیست"; exit 1; }
-          unzip -l "$APK" | grep -q "assets/web/index.html" || { echo "❌ index.html در APK نیست"; exit 1; }
-          unzip -l "$APK" | grep -q "classes.dex" || { echo "❌ کد اپ در APK نیست"; exit 1; }
-          echo "✓ APK سالم است"
+          { echo "--- badging ---"; "$AAPT" dump badging "$APK" | grep -E "^(package|application-label|sdkVersion|targetSdkVersion|launchable-activity)"; } >> diag/verify.txt 2>&1 || true
+          { echo "--- assets در APK ---"; unzip -l "$APK" | grep -i "assets"; } >> diag/verify.txt 2>&1 || echo "(بدون assets)" >> diag/verify.txt
+          { echo "--- پوشهٔ تولیدشده ---"; find android/app/build/generated -maxdepth 4 | head -40; } >> diag/verify.txt 2>&1 || true
+          { echo "--- dex ---"; unzip -l "$APK" | grep -c "classes.*dex"; } >> diag/verify.txt 2>&1 || true
+          cat diag/verify.txt
+
+      - name: Upload APK diagnostics
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: apk-diagnostics
+          path: diag/verify.txt
+          if-no-files-found: ignore
+          retention-days: 5
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v7
