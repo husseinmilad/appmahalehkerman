@@ -42,12 +42,12 @@ val prepareOfflineBundle by tasks.registering(Sync::class) {
 
 android {
     namespace = "ir.qarargah.kerman"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "ir.qarargah.kerman"
         minSdk = 23
-        targetSdk = 35
+        targetSdk = 34
         versionCode = versionCodeValue
         versionName = versionNameValue
         resourceConfigurations += listOf("fa", "en")
