@@ -17,6 +17,9 @@
 
 ---
 
+> **وضعیت:** نسخهٔ `1.0.0` ساخته شد ✅ — APK امضاشده در [Releases](https://github.com/husseinmilad/appmahalehkerman/releases) آمادهٔ نصب است.
+> برای فعال‌سازی نسخهٔ وب، فقط یک‌بار Pages را روشن کنید: [PR_CHECKLIST.md](PR_CHECKLIST.md)
+
 ## فهرست
 
 - [معرفی](#معرفی)
@@ -32,6 +35,7 @@
 - [حریم خصوصی و امنیت](#حریم-خصوصی-و-امنیت)
 - [پرسش‌های پرتکرار](#پرسشهای-پرتکرار)
 - [مجوز](#مجوز)
+- [کارهای باقی‌مانده (دسترسی ادمین)](#کارهای-باقیمانده-دسترسی-ادمین)
 
 ## معرفی
 
@@ -59,7 +63,7 @@
 
 | | |
 |---|---|
-| 📱 **دانلود اپ اندروید (APK)** | [آخرین نسخه در Releases](https://github.com/husseinmilad/appmahalehkerman/releases/latest) |
+| 📱 **دانلود اپ اندروید (APK)** | [آخرین نسخه در Releases](https://github.com/husseinmilad/appmahalehkerman/releases/latest) — [v1.0.0](https://github.com/husseinmilad/appmahalehkerman/releases/tag/v1.0.0) |
 | 🌐 **نسخهٔ وب** | <https://husseinmilad.github.io/appmahalehkerman/> |
 | 🏠 **صفحهٔ معرفی و دانلود** | <https://husseinmilad.github.io/appmahalehkerman> (ریشهٔ مخزن) |
 
@@ -220,6 +224,15 @@ cd android
 <summary><b>آیا اپ روی iPhone نصب می‌شود؟</b></summary>
 نسخهٔ APK مخصوص اندروید است؛ کاربران iPhone می‌توانند نسخهٔ وب را در Safari به صفحهٔ اصلی اضافه کنند و دقیقاً همان امکانات را داشته باشند.
 </details>
+
+## کارهای باقی‌مانده (دسترسی ادمین)
+
+توکن خودکار به تنظیمات مخزن دسترسی ندارد؛ دو کار کوچک در مرورگر لازم است:
+
+1. **Settings ← Pages ← Deploy from a branch ← `main` / `/docs` ← Save**
+2. (اختیاری) افزودن چهار Secret برای امضای رسمی APK
+
+جزئیات گام‌به‌گام: [PR_CHECKLIST.md](PR_CHECKLIST.md)
 
 ## مجوز
 
