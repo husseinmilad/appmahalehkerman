@@ -124,7 +124,10 @@ jobs:
       - name: Verify APK contents
         id: verify
         run: |
-          APK=$(ls out/qarargah-kerman-*.apk | grep -v debug | head -1)
+          # روی PR فقط APK دیباگ ساخته می‌شود؛ در غیر این صورت نسخهٔ release را بررسی می‌کنیم
+          APK=$(ls out/qarargah-kerman-*.apk | grep -v debug | head -1 || true)
+          [ -n "$APK" ] || APK=$(ls out/qarargah-kerman-*.apk | head -1 || true)
+          if [ -z "$APK" ]; then echo "::error title=no apk::هیچ فایل APK ساخته نشد"; exit 1; fi
           AAPT=$(ls "$SDK"/build-tools/*/aapt2 2>/dev/null | sort -V | tail -1)
           BADGING=$("$AAPT" dump badging "$APK" | grep -E "^(package|application-label|sdkVersion|targetSdkVersion)" | tr '\n' ' ')
           echo "badging: $BADGING"
