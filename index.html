@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>قرارگاه مردمی مدافعان وطن – محله کرمان | دانلود اپ اندروید</title>
+<meta name="description" content="نسخهٔ وب و اندروید قرارگاه مردمی مدافعان وطن — محله کرمان شهر تهران: مراسمات، اخبار، گزارش‌های تصویری، نذورات و فرم همکاری">
+<meta name="theme-color" content="#0a3d1a">
+<meta property="og:title" content="قرارگاه مردمی مدافعان وطن – محله کرمان">
+<meta property="og:description" content="مراسمات، اخبار، گزارش‌های تصویری، نذورات و فرم همکاری">
+<meta property="og:image" content="docs/icons/og-image.png">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="192x192" href="docs/icons/icon-192.png">
+<link rel="apple-touch-icon" href="docs/icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a3d1a;--bg2:#062610;--card:rgba(255,255,255,.07);--line:rgba(255,255,255,.16);
+  --tx:#eef7f2;--mut:#a8c4b6;--ac:#1aa07f;--gold:#d6b055;--red:#da0000;
+  --fs:1;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%}
+body{
+  margin:0;min-height:100%;color:var(--tx);
+  font:400 calc(16.5px*var(--fs))/1.9 Vazirmatn,Tahoma,sans-serif;
+  background:
+    radial-gradient(circle at 12% 4%,rgba(26,160,127,.45),transparent 45%),
+    radial-gradient(circle at 88% 22%,rgba(29,78,137,.5),transparent 50%),
+    radial-gradient(circle at 30% 96%,rgba(214,176,85,.22),transparent 45%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+  background-attachment:fixed;
+}
+.flagline{height:6px;background:linear-gradient(90deg,var(--red) 0 33.3%,#fff 33.3% 66.6%,#239f40 66.6%);position:sticky;top:0;z-index:9}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 64px}
+.hero{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.hero img{width:104px;height:104px;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.45);flex:none}
+.hero h1{font-size:clamp(1.3em,4.6vw,1.85em);line-height:1.5;margin:0 0 4px;font-weight:800}
+.hero p{margin:0;color:var(--mut);font-size:.95em}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.badge{font-size:.75em;font-weight:700;padding:4px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--mut)}
+.badge.g{background:rgba(26,160,127,.2);border-color:rgba(26,160,127,.5);color:#8ff0d0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin:0 0 16px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.card h2{margin:0 0 10px;font-size:1.12em;font-weight:800}
+.card h3{margin:14px 0 6px;font-size:1em;font-weight:800}
+.card p{margin:6px 0;color:var(--mut);font-size:.94em}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;border-radius:16px;padding:12px 18px;font:inherit;font-weight:800;text-decoration:none;border:0;cursor:pointer;margin:10px 0 0}
+.btn.primary{background:linear-gradient(135deg,#1aa07f,#0b6e5b);color:#fff;box-shadow:0 10px 30px rgba(26,160,127,.35)}
+.btn.ghost{background:rgba(255,255,255,.08);color:var(--tx);border:1px solid var(--line)}
+.btn.gold{background:linear-gradient(135deg,#d6b055,#a98425);color:#241a00}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.row>*{flex:1 1 220px}
+.step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.step:last-child{border:0}
+.step b{flex:none;width:30px;height:30px;border-radius:50%;background:rgba(26,160,127,.22);border:1px solid rgba(26,160,127,.5);color:#8ff0d0;display:grid;place-items:center;font-size:.9em}
+.step span{font-size:.94em;color:var(--mut)}
+.step span b2{color:var(--tx);font-weight:700}
+code{background:rgba(0,0,0,.35);border:1px solid var(--line);border-radius:8px;padding:2px 7px;font-size:.85em;direction:ltr;display:inline-block;unicode-bidi:embed;word-break:break-all}
+.foot{text-align:center;color:var(--mut);font-size:.82em;opacity:.8;margin-top:26px}
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:6px}
+.toc a{display:block;padding:12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--tx);text-decoration:none;font-size:.9em;font-weight:600;text-align:center}
+.toc a:hover{background:rgba(26,160,127,.2)}
+details{border-top:1px solid var(--line);padding-top:10px;margin-top:10px}
+summary{cursor:pointer;font-weight:700;font-size:.95em}
+details p{margin-top:8px}
+@media (min-width:620px){.hero img{width:128px;height:128px}}
+</style>
+</head>
+<body>
+<div class="flagline"></div>
+<div class="wrap">
+
+  <header class="hero">
+    <img src="docs/icons/icon-512.png" alt="لوگوی قرارگاه">
+    <div style="flex:1 1 300px">
+      <h1>قرارگاه مردمی مدافعان وطن<br>محلهٔ کرمان — شهر تهران</h1>
+      <p>مراسمات، اخبار، گزارش‌های تصویری، نذورات و فرم همکاری — همیشه همراه شما</p>
+      <div class="badges">
+        <span class="badge g">نسخه ۱٫۰٫۰</span>
+        <span class="badge">اندروید ۶ به بالا</span>
+        <span class="badge">قابل نصب روی وب</span>
+        <span class="badge">آفلاین</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2>📲 دریافت برنامه</h2>
+    <p>دو راه برای استفاده وجود دارد: نصب اپ اندروید یا استفادهٔ مستقیم از نسخهٔ وب. محتوای هر دو یکی است و مدیریت آن از پنل خود برنامه انجام می‌شود.</p>
+    <a class="btn primary" id="apk" href="https://github.com/husseinmilad/appmahalehkerman/releases/latest">⬇️ دانلود اپ اندروید (APK)</a>
+    <a class="btn gold" href="./docs/">🌐 ورود به نسخهٔ وب</a>
+    <details>
+      <summary>راهنمای نصب فایل APK روی گوشی</summary>
+      <div class="step"><b>۱</b><span>روی دکمهٔ «دانلود اپ اندروید» بزنید و از صفحهٔ Releases فایل <code>qarargah-kerman-1.0.0.apk</code> را دانلود کنید.</span></div>
+      <div class="step"><b>۲</b><span>فایل دانلودشده را باز کنید؛ اگر گوشی اجازه نداد، از تنظیمات <b2>«نصب برنامه‌های ناشناس»</b> را برای مرورگر یا فایل‌منیجر فعال کنید.</span></div>
+      <div class="step"><b>۳</b><span>پس از نصب، برنامه را باز کنید. برای دریافت اعلان مراسمات، دکمهٔ <b2>«فعال‌سازی اعلان»</b> در بخش «بیشتر» را بزنید.</span></div>
+      <div class="step"><b>۴</b><span>در iPhone می‌توانید نسخهٔ وب را در Safari باز کرده و <b2>«افزودن به صفحهٔ اصلی»</b> را بزنید.</span></div>
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>🧭 بخش‌های برنامه</h2>
+    <div class="toc">
+      <a href="./docs/?t=events">📢 مراسمات</a>
+      <a href="./docs/?t=reports">🖼️ گزارش‌های تصویری</a>
+      <a href="./docs/?t=pay">💝 نذورات و کمک‌ها</a>
+      <a href="./docs/?t=collab">🤝 فرم همکاری</a>
+      <a href="./docs/?t=contact">💬 ارتباط با خادمان</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🔧 ساختار پروژه</h2>
+    <p>این مخزن شامل سه بخش است: برنامهٔ وب (خودِ اپ)، پروژهٔ اندروید، و محتوای منتشرشده.</p>
+    <h3>پوشه‌ها</h3>
+    <p>
+      <code>docs/</code> — برنامهٔ وب (PWA) که روی GitHub Pages منتشر می‌شود<br>
+      <code>android/</code> — پروژهٔ اندروید (Kotlin + WebView)<br>
+      <code>data/content.json</code> — محتوایی که مدیر از پنل برنامه منتشر می‌کند<br>
+      <code>media/</code> — عکس‌ها و فیلم‌های گزارش‌ها<br>
+      <code>docs/</code> = وب‌اپ • <code>README.md</code> = راهنمای کامل
+    </p>
+    <a class="btn ghost" href="https://github.com/husseinmilad/appmahalehkerman">مشاهدهٔ مخزن در گیت‌هاب</a>
+  </section>
+
+  <section class="card">
+    <h2>🔐 پنل مدیریت و انتشار محتوا</h2>
+    <p>مدیر قرارگاه از داخل خود برنامه (بخش «بیشتر» ← ۵ بار لمس نسخهٔ پایین صفحه) وارد پنل می‌شود و رمز پیش‌فرض <code>1234</code> است — پس از اولین ورود آن را تغییر دهید.</p>
+    <p>برای انتشار محتوا برای همهٔ کاربران، در پنل ← «تنظیمات» ← «اتصال به گیت‌هاب» یک توکن Fine-grained با دسترسی <b>Contents: Read and write</b> به مخزن وارد کنید. توضیح کامل در فایل <code>README.md</code> آمده است.</p>
+  </section>
+
+  <p class="foot">قرارگاه مردمی مدافعان وطن — محله کرمان، تهران<br>ایمان · انقلاب · خدمت · همت</p>
+</div>
+<script>
+  // لینک دانلود: اگر API گیت‌هاب قابل دسترس بود، مستقیم به آخرین فایل APK وصل می‌شود
+  (async () => {
+    try {
+      const r = await fetch('https://api.github.com/repos/husseinmilad/appmahalehkerman/releases/latest');
+      if (!r.ok) return;
+      const j = await r.json();
+      const apk = (j.assets || []).find(a => a.name.endsWith('.apk') && !a.name.includes('debug'));
+      if (apk) {
+        const a = document.getElementById('apk');
+        a.href = apk.browser_download_url;
+        a.innerHTML = '⬇️ دانلود مستقیم اپ اندروید (نسخهٔ ' + j.tag_name.replace(/^v/, '') + ')';
+      }
+    } catch (e) { /* حالت پیش‌فرض: صفحهٔ Releases */ }
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+# ---------- Android / Gradle ----------
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.idea/
+android/.kotlin/
+android/captures/
+*.apk
+*.aab
+*.jks
+*.keystore
+*.b64
+
+# ---------- IDE ----------
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ---------- ابزارهای موقت ----------
+node_modules/
+.npm/
+__pycache__/
+*.pyc
+*.log
