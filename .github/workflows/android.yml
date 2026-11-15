@@ -124,15 +124,29 @@ jobs:
       - name: Verify APK contents
         id: verify
         run: |
-          mkdir -p diag
           APK=$(ls out/qarargah-kerman-*.apk | grep -v debug | head -1)
-          echo "APK=$APK" | tee diag/verify.txt
           AAPT=$(ls "$SDK"/build-tools/*/aapt2 2>/dev/null | sort -V | tail -1)
-          { echo "--- badging ---"; "$AAPT" dump badging "$APK" | grep -E "^(package|application-label|sdkVersion|targetSdkVersion|launchable-activity)"; } >> diag/verify.txt 2>&1 || true
-          { echo "--- assets در APK ---"; unzip -l "$APK" | grep -i "assets"; } >> diag/verify.txt 2>&1 || echo "(بدون assets)" >> diag/verify.txt
-          { echo "--- پوشهٔ تولیدشده ---"; find android/app/build/generated -maxdepth 4 | head -40; } >> diag/verify.txt 2>&1 || true
-          { echo "--- dex ---"; unzip -l "$APK" | grep -c "classes.*dex"; } >> diag/verify.txt 2>&1 || true
-          cat diag/verify.txt
+          BADGING=$("$AAPT" dump badging "$APK" | grep -E "^(package|application-label|sdkVersion|targetSdkVersion)" | tr '\n' ' ')
+          echo "badging: $BADGING"
+          echo "::notice title=APK badging::$BADGING"
+
+          LIST=$(unzip -l "$APK" | awk '{print $4}' | grep -E "^assets/" | head -8 | tr '\n' ' ')
+          COUNT=$(unzip -l "$APK" | awk '{print $4}' | grep -cE "^assets/web/")
+          echo "assets entries: $COUNT -> $LIST"
+          echo "::notice title=APK assets count::$COUNT files: $LIST"
+
+          GEN=$(find android/app/build/generated -name "index.html" 2>/dev/null | head -3 | tr '\n' ' ')
+          echo "generated index.html: $GEN"
+          if [ -n "$GEN" ]; then echo "::notice title=offline bundle generated::$GEN"; else echo "::warning title=offline bundle::هیچ index.html در build/generated پیدا نشد"; fi
+
+          DEX=$(unzip -l "$APK" | grep -cE "classes[0-9]*\\.dex")
+          echo "::notice title=dex files::$DEX"
+
+          if [ "$COUNT" -lt 3 ]; then
+            echo "::warning title=offline assets missing::بستهٔ آفلاین در APK نیست (count=$COUNT)"
+          else
+            echo "::notice title=offline assets ok::بستهٔ آفلاین داخل APK است"
+          fi
 
       - name: Upload APK diagnostics
         if: ${{ always() }}
