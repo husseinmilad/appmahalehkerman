@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- نام برنامه -->
+    <string name="app_name">قرارگاه کرمان</string>
+    <string name="app_name_full">قرارگاه مردمی مدافعان وطن – محله کرمان</string>
+
+    <!-- وضعیت‌ها -->
+    <string name="offline_mode">📴 حالت آفلاین — نسخهٔ ذخیره‌شده در برنامه</string>
+    <string name="no_app_for_link">برنامه‌ای برای باز کردن این لینک پیدا نشد</string>
+    <string name="share_app">اشتراک‌گذاری برنامه</string>
+
+    <!-- اعلان‌ها -->
+    <string name="channel_events">یادآوری مراسمات</string>
+    <string name="channel_events_desc">اعلان پیش از شروع مراسم‌های قرارگاه</string>
+    <string name="channel_news">اخبار و اطلاعیه‌ها</string>
+    <string name="channel_news_desc">اطلاعیه‌های جدید قرارگاه مردمی مدافعان وطن</string>
+    <string name="notif_enabled">اعلان‌ها فعال شد ✓</string>
+    <string name="notif_denied">اجازهٔ اعلان داده نشد؛ از تنظیمات گوشی اجازه بدهید</string>
+
+    <!-- میان‌بُرها -->
+    <string name="shortcut_events">مراسمات</string>
+    <string name="shortcut_reports">گزارش‌های تصویری</string>
+    <string name="shortcut_pay">نذورات و کمک‌ها</string>
+</resources>

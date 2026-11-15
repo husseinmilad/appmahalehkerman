@@ -1,0 +1,27 @@
+{
+  "name": "قرارگاه مردمی مدافعان وطن – محله کرمان",
+  "short_name": "قرارگاه کرمان",
+  "description": "مراسمات، اخبار، گزارش‌های تصویری، نذورات و فرم همکاری قرارگاه مردمی مدافعان وطن — محله کرمان شهر تهران",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./?src=pwa",
+  "scope": "./",
+  "id": "/appmahalehkerman/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
+  "background_color": "#0a3d1a",
+  "theme_color": "#0a3d1a",
+  "categories": ["news", "social", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "مراسمات", "short_name": "مراسمات", "url": "./?t=events", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "گزارش‌های تصویری", "short_name": "گزارش‌ها", "url": "./?t=reports", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "نذورات و کمک‌ها", "short_name": "نذورات", "url": "./?t=pay", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

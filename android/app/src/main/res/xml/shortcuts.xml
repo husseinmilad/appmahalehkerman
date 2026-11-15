@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="events"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_events">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://husseinmilad.github.io/appmahalehkerman/?t=events"
+            android:targetPackage="ir.qarargah.kerman"
+            android:targetClass="ir.qarargah.kerman.MainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="reports"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_reports">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://husseinmilad.github.io/appmahalehkerman/?t=reports"
+            android:targetPackage="ir.qarargah.kerman"
+            android:targetClass="ir.qarargah.kerman.MainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="pay"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="@string/shortcut_pay">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://husseinmilad.github.io/appmahalehkerman/?t=pay"
+            android:targetPackage="ir.qarargah.kerman"
+            android:targetClass="ir.qarargah.kerman.MainActivity" />
+    </shortcut>
+</shortcuts>
