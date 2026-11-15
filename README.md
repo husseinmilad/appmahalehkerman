@@ -12,12 +12,12 @@
 <p align="center">
   <a href="https://github.com/husseinmilad/appmahalehkerman/releases/latest"><img alt="APK" src="https://img.shields.io/badge/⬇️_دانلود-APK_اندروید-0b6e5b?style=for-the-badge"></a>
   <a href="https://husseinmilad.github.io/appmahalehkerman/"><img alt="Web" src="https://img.shields.io/badge/🌐_نسخهٔ_وب-GitHub_Pages-c8a44b?style=for-the-badge"></a>
-  <img alt="version" src="https://img.shields.io/badge/نسخه-1.0.0-1aa07f?style=for-the-badge">
+  <img alt="version" src="https://img.shields.io/badge/نسخه-1.0.1-1aa07f?style=for-the-badge">
 </p>
 
 ---
 
-> **وضعیت:** نسخهٔ `1.0.0` ساخته شد ✅ — APK امضاشده در [Releases](https://github.com/husseinmilad/appmahalehkerman/releases) آمادهٔ نصب است.
+> **وضعیت:** نسخهٔ `1.0.1` ساخته شد ✅ — APK امضاشده در [Releases](https://github.com/husseinmilad/appmahalehkerman/releases) آمادهٔ نصب است.
 > برای فعال‌سازی نسخهٔ وب، فقط یک‌بار Pages را روشن کنید: [PR_CHECKLIST.md](PR_CHECKLIST.md)
 
 ## فهرست
@@ -63,7 +63,7 @@
 
 | | |
 |---|---|
-| 📱 **دانلود اپ اندروید (APK)** | [آخرین نسخه در Releases](https://github.com/husseinmilad/appmahalehkerman/releases/latest) — [v1.0.0](https://github.com/husseinmilad/appmahalehkerman/releases/tag/v1.0.0) |
+| 📱 **دانلود اپ اندروید (APK)** | [آخرین نسخه در Releases](https://github.com/husseinmilad/appmahalehkerman/releases/latest) — [v1.0.1](https://github.com/husseinmilad/appmahalehkerman/releases/tag/v1.0.1) |
 | 🌐 **نسخهٔ وب** | <https://husseinmilad.github.io/appmahalehkerman/> |
 | 🏠 **صفحهٔ معرفی و دانلود** | <https://husseinmilad.github.io/appmahalehkerman> (ریشهٔ مخزن) |
 
@@ -224,6 +224,17 @@ cd android
 <summary><b>آیا اپ روی iPhone نصب می‌شود؟</b></summary>
 نسخهٔ APK مخصوص اندروید است؛ کاربران iPhone می‌توانند نسخهٔ وب را در Safari به صفحهٔ اصلی اضافه کنند و دقیقاً همان امکانات را داشته باشند.
 </details>
+
+## تغییرات نسخه‌ها
+
+### نسخهٔ ۱٫۰٫۱ (آبان ۱۴۰۴)
+- 🐞 **اصلاح انتخاب عکس «بالای صفحه اول»**: در اپ اندروید متد `onShowFileChooser` پیاده‌سازی شد؛ پیش از این روی گوشی هیچ پنجرهٔ انتخاب عکسی باز نمی‌شد. حالا دکمهٔ «انتخاب عکس از گالری» پنجرهٔ عکس‌های گوشی را باز می‌کند و عکس انتخاب‌شده در پنل پیش‌نمایش داده می‌شود. (همین اصلاح برای عکس‌های گزارش‌ها هم اعمال شد.)
+- 🇮🇷 **پرچم جدید بالای صفحه**: طرح ارسالی جایگزین گرادیان ساده شد و به‌صورت جاسازی‌شده (inline) در فایل قرار گرفت تا آفلاین هم نمایش داده شود.
+- 🔒 **یادآوری محرمانگی** زیر فرم همکاری: «اطلاعات شما محرمانه نزد خادمان قرارگاه باقی می‌ماند.»
+- 🎨 اصلاح چیدمان: محتوا زیر نوار پرچم فاصله می‌گیرد تا روی متن نیفتد.
+
+### نسخهٔ ۱٫۰٫۰
+- انتشار اولیهٔ وب‌اپ و اپ اندروید.
 
 ## کارهای باقی‌مانده (دسترسی ادمین)
 

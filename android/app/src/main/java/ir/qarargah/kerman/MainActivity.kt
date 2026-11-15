@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import android.webkit.CookieManager
 import android.webkit.GeolocationPermissions
 import android.webkit.JavascriptInterface
+import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
@@ -44,6 +45,10 @@ import androidx.webkit.WebViewFeature
  */
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private const val FILE_CHOOSER_TIMEOUT_MS = 500L
+    }
+
     private lateinit var webView: WebView
     private lateinit var swipe: SwipeRefreshLayout
     private lateinit var progress: ProgressBar
@@ -56,6 +61,21 @@ class MainActivity : AppCompatActivity() {
     private val notificationPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             notifyResult(granted)
+        }
+
+    /** درخواست در حال اجرای <input type="file"> در صفحهٔ وب */
+    private var pendingFileCallback: ValueCallback<Array<Uri>>? = null
+    private var isFilePickerOpen = false
+    private val mainHandler = android.os.Handler(android.os.Looper.getMainLooper())
+
+    private val filePicker =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            isFilePickerOpen = false
+            val callback = pendingFileCallback ?: return@registerForActivityResult
+            pendingFileCallback = null
+            callback.onReceiveValue(
+                WebChromeClient.FileChooserParams.parseResult(result.resultCode, result.data)
+            )
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         setupInsets()
         setupBackNavigation()
 
+        Notifications.ensureChannels(this)
         val startUrl = intent?.data?.toString()?.takeIf { isTrusted(it) } ?: remoteUrl
         if (savedInstanceState == null) {
             loadSmart(startUrl)
@@ -161,8 +182,44 @@ class MainActivity : AppCompatActivity() {
             ) {
                 callback.invoke(origin, false, false)
             }
+
+            /**
+             * باز کردن پنجرهٔ انتخاب فایل برای <input type="file">
+             * (انتخاب عکس بنر صفحهٔ اول و عکس‌های گزارش‌ها).
+             * بدون این متد، WebView هیچ واکنشی به دکمهٔ انتخاب عکس نشان نمی‌دهد.
+             */
+            override fun onShowFileChooser(
+                view: WebView,
+                filePathCallback: ValueCallback<Array<Uri>>,
+                fileChooserParams: FileChooserParams
+            ): Boolean {
+                // اگر درخواست قبلی نیمه‌کاره مانده باشد، آزادش می‌کنیم
+                pendingFileCallback?.onReceiveValue(null)
+                pendingFileCallback = filePathCallback
+
+                val intent = runCatching { fileChooserParams.createIntent() }
+                    .getOrElse { fallbackImageIntent() }
+                    .apply { addCategory(Intent.CATEGORY_OPENABLE) }
+                return try {
+                    isFilePickerOpen = true
+                    filePicker.launch(intent)
+                    true
+                } catch (e: ActivityNotFoundException) {
+                    pendingFileCallback = null
+                    isFilePickerOpen = false
+                    ToastCompat.short(this@MainActivity, getString(R.string.no_file_manager))
+                    false
+                }
+            }
         }
     }
+
+    /** طرح جایگزین انتخاب عکس، برای وقتی که WebView نمی‌تواند Intent بسازد. */
+    private fun fallbackImageIntent(): Intent =
+        Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "image/*"
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        }
 
     private fun setupSwipe() {
         swipe.setColorSchemeColors(getColor(R.color.brand_accent))
@@ -296,6 +353,16 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         webView.onResume()
+        // اگر callback انتخاب فایل معلق مانده باشد (مثلاً انتخابگر به‌دلیل کمبود حافظه بسته شده)،
+        // آزادش می‌کنیم تا دکمهٔ انتخاب عکس تا ری‌استارت برنامه از کار نیفتد.
+        if (!isFilePickerOpen && pendingFileCallback != null) {
+            mainHandler.postDelayed({
+                if (pendingFileCallback != null && !isFilePickerOpen) {
+                    pendingFileCallback?.onReceiveValue(null)
+                    pendingFileCallback = null
+                }
+            }, FILE_CHOOSER_TIMEOUT_MS)
+        }
     }
 
     override fun onPause() {
@@ -304,6 +371,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        // اگر پنجرهٔ انتخاب فایل باز مانده باشد، callback را آزاد می‌کنیم
+        pendingFileCallback?.onReceiveValue(null)
+        pendingFileCallback = null
         webView.destroy()
         super.onDestroy()
     }
