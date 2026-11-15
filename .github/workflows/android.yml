@@ -128,7 +128,10 @@ jobs:
           echo "بررسی: $APK"
           AAPT=$(ls "$SDK"/build-tools/*/aapt2 2>/dev/null | sort -V | tail -1)
           "$AAPT" dump badging "$APK" | grep -E "^(package|application-label|sdkVersion|targetSdkVersion|launchable-activity)" || true
-          echo "--- محتویات assets ---"
+          echo "--- محتویات assets (فهرست کامل) ---"
+          unzip -l "$APK" | grep -i "assets" || echo "(هیچ فایل assets یافت نشد)"
+          echo "--- تولید بستهٔ آفلاین ---"
+          ls -R android/app/build/generated/offlineBundle 2>/dev/null || echo "(پوشهٔ تولیدشده وجود ندارد)"
           unzip -l "$APK" | grep "assets/web" || { echo "❌ بستهٔ آفلاین در APK نیست"; exit 1; }
           unzip -l "$APK" | grep -q "assets/web/index.html" || { echo "❌ index.html در APK نیست"; exit 1; }
           unzip -l "$APK" | grep -q "classes.dex" || { echo "❌ کد اپ در APK نیست"; exit 1; }
