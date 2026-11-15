@@ -118,12 +118,29 @@ jobs:
             cp android/app/build/outputs/apk/release/app-release-unsigned.apk "out/qarargah-kerman-${V}-unsigned.apk"
           fi
           ls -lh out
+          sha256sum out/*.apk > out/SHA256SUMS.txt
+          cat out/SHA256SUMS.txt
+
+      - name: Verify APK contents
+        run: |
+          set -e
+          APK=$(ls out/qarargah-kerman-*-[0-9]*.apk 2>/dev/null | grep -v debug | head -1)
+          echo "بررسی: $APK"
+          AAPT=$(ls "$SDK"/build-tools/*/aapt2 2>/dev/null | sort -V | tail -1)
+          "$AAPT" dump badging "$APK" | grep -E "^(package|application-label|sdkVersion|targetSdkVersion|launchable-activity)" || true
+          echo "--- محتویات assets ---"
+          unzip -l "$APK" | grep "assets/web" || { echo "❌ بستهٔ آفلاین در APK نیست"; exit 1; }
+          unzip -l "$APK" | grep -q "assets/web/index.html" || { echo "❌ index.html در APK نیست"; exit 1; }
+          unzip -l "$APK" | grep -q "classes.dex" || { echo "❌ کد اپ در APK نیست"; exit 1; }
+          echo "✓ APK سالم است"
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v7
         with:
           name: qarargah-kerman-apk
-          path: out/*.apk
+          path: |
+            out/*.apk
+            out/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 90
 
@@ -148,7 +165,9 @@ jobs:
             - 🏠 صفحهٔ دانلود: https://husseinmilad.github.io/appmahalehkerman/
 
             فایل `-debug.apk` فقط برای تست است.
-          files: out/*.apk
+          files: |
+            out/*.apk
+            out/SHA256SUMS.txt
           fail_on_unmatched_files: false
           prerelease: false
           make_latest: true
